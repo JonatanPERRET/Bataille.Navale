@@ -52,20 +52,56 @@ void seConnecter(){
             }
         }
         if (VerifMDP == 48){
-            printf("JUSTE");
+            FILE *User = NULL;
+            remove("ActualUser");
+            User = fopen("ActualUser", "w");
+
+            fprintf(User, "%s", UserName);
+            fclose(User);
+
         }
         else printf("Mot de passe incorect\n");
-        system("Pause");
     }
     else {
-        printf("Utilisateur non trouve\nVoulez vous creer un compte ?");
+        printf("Utilisateur non trouve\nVoulez vous creer un compte ? (1/0)\n");
         scanf("%d", &Choix);
         if (Choix == 1) creerUnCompte();
-        else printf("Choix incorect");
+        else {
+            printf("\nVoulez vous fermer l'application ?\n(1/0)");
+            scanf("%d", &Choix);
+            if(Choix == 1){
+                exit(0);
+            }
+            else {
+                printf("Alors, retour au menu ");
+                seConnecter();
+            }
+        }
     }
-    system("Pause");
 }
 
+void menuPrincipal(){
+    int Choix = 0;
+    system("cls");
+    printf("Bienvenu au menu principal,\nQue voulez vous faire ?\n");
+    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - \n");
+    scanf ("%d", &Choix);
+    switch (Choix){
+        case 1: {
+            system("cls");
+            printf("Jouer une partie\n");
+            break;
+        }
+        case 2:{
+            system("cls");
+            printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont, en general, les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis");
+            printf("\nAppuyer sur 1 pour revenir au menu principale\n");
+            scanf("%d", &Choix);
+            if (Choix == 1) menuPrincipal();
+        }
+    }
+
+}
 
 int main() {
 
@@ -79,7 +115,7 @@ int main() {
         case 1:
             printf("Entrez vos identifiants :");
             seConnecter();
-            printf("%c", GlobalUser);
+            menuPrincipal();
             break;
         case 2:
             system("cls");
@@ -89,6 +125,7 @@ int main() {
         default:
             printf("Choix invalide");
             system("cls");
+            break;
     }
 
     return 0;
