@@ -1,4 +1,4 @@
-#Bataille Navale By Jonatan PERRET.
+# Bataille Navale By Jonatan PERRET.
 Je suis tout seul pour ce projet.
 Cet application a pour but de pouvoir jouer à la bataille navale.
 J'ai fait cet apllication en un peu plus d'un mois dans le courant de Fevrier-Mars 2020.
