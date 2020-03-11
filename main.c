@@ -1,3 +1,6 @@
+/*
+ * Début d'en-tête
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
