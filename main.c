@@ -88,7 +88,16 @@ void jouerPartie (){
     int Vertical = 0;
     int Horizontal = 0;
     int TableauJeu [10][10] = {0};
-    int TableauJeu1 [10][10] = {0,0,0,0,0,0,1,0,0,0,1,1,1,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};
+    int TableauJeu1 [10][10] = {0,0,0,0,0,0,1,0,0,0,
+                                1,1,1,1,0,0,1,0,1,0,
+                                0,0,0,0,0,0,1,0,1,0,
+                                0,0,1,0,0,0,0,0,0,0,
+                                0,0,1,0,0,0,0,1,1,1,
+                                0,0,1,0,0,0,0,0,0,0,
+                                0,0,1,0,0,0,0,0,0,0,
+                                0,0,0,0,0,0,0,0,0,0,
+                                0,0,0,0,1,1,1,1,1,0,
+                                0,0,0,0,0,0,0,0,0,0};
     int TableauJeu2 [10][10] = {0};
     int TableauJeu3 [10][10] = {0};
     int TableauJeu4 [10][10] = {0};
@@ -101,11 +110,37 @@ void jouerPartie (){
         for (int i = 0; i < 10; i++) {
             printf("%2d ", i+1);
             for (int j = 0; j < 10; j++) {
-                if (TableauJeu1[i][j]==0) printf("%c ", 219);
-                if (TableauJeu1[i][j]==1) printf("%c ", 219);
+                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
+                    TableauJeu1[4][7] = 4;
+                    TableauJeu1[4][8] = 4;
+                    TableauJeu1[4][9] = 4;
+                }
+                if ((TableauJeu1[1][0] == 3) && (TableauJeu1[1][1] == 3) && (TableauJeu1[1][2] == 3) && (TableauJeu1[1][3] == 3)){
+                    TableauJeu1[1][0] = 4;
+                    TableauJeu1[1][1] = 4;
+                    TableauJeu1[1][2] = 4;
+                    TableauJeu1[1][3] = 4;
+                }
+                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
+                    TableauJeu1[4][7] = 4;
+                    TableauJeu1[4][8] = 4;
+                    TableauJeu1[4][9] = 4;
+                }
+                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
+                    TableauJeu1[4][7] = 4;
+                    TableauJeu1[4][8] = 4;
+                    TableauJeu1[4][9] = 4;
+                }
+                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
+                    TableauJeu1[4][7] = 4;
+                    TableauJeu1[4][8] = 4;
+                    TableauJeu1[4][9] = 4;
+                }
+                if (TableauJeu1[i][j]==0) printf("%c ", 255);
+                if (TableauJeu1[i][j]==1) printf("%c ", 255);
                 if (TableauJeu1[i][j]==2) printf("\033[34m%c \033[0m", 219);
                 if (TableauJeu1[i][j]==3) printf("\033[31m%c \033[0m", 219);
-                //printf("%d ", TableauJeu[i][j]);
+                if (TableauJeu1[i][j]==4) printf("\033[32m%c \033[0m", 219);
             }
             printf("\n");
         }
@@ -161,6 +196,12 @@ void menuPrincipal(){
 int main() {
     int Choix = 0;
     system("cls");
+    printf(" _             _           _  _  _                                        _       \n"
+           "| |           | |         (_)| || |                                      | |      \n"
+           "| |__    __ _ | |_   __ _  _ | || |  ___      _ __    __ _ __   __  __ _ | |  ___ \n"
+           "| '_ \\  / _` || __| / _` || || || | / _ \\    | '_ \\  / _` |\\ \\ / / / _` || | / _ \\\n"
+           "| |_) || (_| || |_ | (_| || || || ||  __/    | | | || (_| | \\ V / | (_| || ||  __/\n"
+           "|_.__/  \\__,_| \\__| \\__,_||_||_||_| \\___|    |_| |_| \\__,_|  \\_/   \\__,_||_| \\___|\n");
     printf("Bonjour,\nBienvenue dans le jeu de la bataille navale.\nChoisissez une option :");
     printf("\n1 - Se connecter\n2 - Creer un compte\n");
     scanf("%d", &Choix);
