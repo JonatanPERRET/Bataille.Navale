@@ -84,20 +84,22 @@ void seConnecter(){
     }
 }
 void jouerPartie (){
+    int Choix = 0;
+    int Compteur = 0;
     int compteurJoueur = 0;
     int Vertical = 0;
     int Horizontal = 0;
     int TableauJeu [10][10] = {0};
-    int TableauJeu1 [10][10] = {0,0,0,0,0,0,1,0,0,0,
-                                1,1,1,1,0,0,1,0,1,0,
-                                0,0,0,0,0,0,1,0,1,0,
-                                0,0,1,0,0,0,0,0,0,0,
-                                0,0,1,0,0,0,0,1,1,1,
-                                0,0,1,0,0,0,0,0,0,0,
-                                0,0,1,0,0,0,0,0,0,0,
-                                0,0,0,0,0,0,0,0,0,0,
-                                0,0,0,0,1,1,1,1,1,0,
-                                0,0,0,0,0,0,0,0,0,0};
+    int TableauJeu1 [10][10] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+                                1, 1, 1, 1, 0, 0, 1, 0, 1, 0,
+                                0, 0, 0, 0, 0, 0, 1, 0, 1, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int TableauJeu2 [10][10] = {0};
     int TableauJeu3 [10][10] = {0};
     int TableauJeu4 [10][10] = {0};
@@ -111,51 +113,82 @@ void jouerPartie (){
             printf("%2d ", i+1);
             for (int j = 0; j < 10; j++) {
                 if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
-                    TableauJeu1[4][7] = 4;
-                    TableauJeu1[4][8] = 4;
-                    TableauJeu1[4][9] = 4;
+                    TableauJeu1[4][7] = 5;
+                    TableauJeu1[4][8] = 5;
+                    TableauJeu1[4][9] = 5;
+                    Compteur++;
                 }
                 if ((TableauJeu1[1][0] == 3) && (TableauJeu1[1][1] == 3) && (TableauJeu1[1][2] == 3) && (TableauJeu1[1][3] == 3)){
-                    TableauJeu1[1][0] = 4;
-                    TableauJeu1[1][1] = 4;
-                    TableauJeu1[1][2] = 4;
-                    TableauJeu1[1][3] = 4;
+                    TableauJeu1[1][0] = 5;
+                    TableauJeu1[1][1] = 5;
+                    TableauJeu1[1][2] = 5;
+                    TableauJeu1[1][3] = 5;
+                    Compteur++;
                 }
-                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
-                    TableauJeu1[4][7] = 4;
-                    TableauJeu1[4][8] = 4;
-                    TableauJeu1[4][9] = 4;
+                if ((TableauJeu1[0][6] == 3) && (TableauJeu1[1][6] == 3) && (TableauJeu1[2][6] == 3)){
+                    TableauJeu1[0][6] = 5;
+                    TableauJeu1[1][6] = 5;
+                    TableauJeu1[2][6] = 5;
+                    Compteur++;
                 }
-                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
-                    TableauJeu1[4][7] = 4;
-                    TableauJeu1[4][8] = 4;
-                    TableauJeu1[4][9] = 4;
+                if ((TableauJeu1[8][4] == 3) && (TableauJeu1[8][5] == 3) && (TableauJeu1[8][6] == 3) && (TableauJeu1[8][7] == 3) && (TableauJeu1[8][8] == 3)){
+                    TableauJeu1[8][4] = 5;
+                    TableauJeu1[8][5] = 5;
+                    TableauJeu1[8][6] = 5;
+                    TableauJeu1[8][7] = 5;
+                    TableauJeu1[8][8] = 5;
+                    Compteur++;
                 }
-                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){
-                    TableauJeu1[4][7] = 4;
-                    TableauJeu1[4][8] = 4;
-                    TableauJeu1[4][9] = 4;
+                if ((TableauJeu1[1][8] == 3) && (TableauJeu1[2][8] == 3)){
+                    TableauJeu1[1][8] = 5;
+                    TableauJeu1[2][8] = 5;
+                    Compteur++;
                 }
                 if (TableauJeu1[i][j]==0) printf("%c ", 255);
                 if (TableauJeu1[i][j]==1) printf("%c ", 255);
                 if (TableauJeu1[i][j]==2) printf("\033[34m%c \033[0m", 219);
                 if (TableauJeu1[i][j]==3) printf("\033[31m%c \033[0m", 219);
-                if (TableauJeu1[i][j]==4) printf("\033[32m%c \033[0m", 219);
+                if (TableauJeu1[i][j]==5) printf("\033[32m%c \033[0m", 219);
             }
             printf("\n");
         }
-        printf("Ou voulez vous tirer ?\nVertical :\n");
-        scanf("%d", &Vertical);
-        printf("Horizontal :\n");
-        scanf("%d", &Horizontal);
-        compteurJoueur += 1;
-        TableauJeu1[Vertical - 1][Horizontal - 1] += 2;
+        if (Compteur < 5) {
+            printf("Ou voulez vous tirer ?\nVertical : (11 pour quitter)\n");
+            scanf("%d", &Vertical);
+            if (Vertical < 11) {
+                printf("Horizontal :\n");
+                scanf("%d", &Horizontal);
+                compteurJoueur += 1;
+                TableauJeu1[Vertical - 1][Horizontal - 1] += 2;
+            }
+        } else {
+            system("cls");
+            printf(" _    _ _____ _   _  _   _  ___________ \n"
+                   "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
+                   "| |  | | | | |  \\| ||  \\| || |__ | |_/ /\n"
+                   "| |/\\| | | | | . ` || . ` ||  __||    / \n"
+                   "\\  /\\  /_| |_| |\\  || |\\  || |___| |\\ \\ \n"
+                   " \\/  \\/ \\___/\\_| \\_/\\_| \\_/\\____/\\_| \\_|\n"
+                   "                                        \n");
+            printf("Vous avez gagne\n1 - Renvenir au menu principal\n2 - Quitter\n");
+            scanf("%d", &Choix);
+            switch (Choix){
+                case 1:
+                    break;
+                case 2:
+                    exit(EXIT_SUCCESS);
+            }
+
+
+
+
+            }
     }
-    while (Vertical < 11);
+    while ((Vertical < 11) && (Compteur < 5));
 
 
 
-    system("Pause");
+
 
 
 
@@ -171,6 +204,7 @@ void menuPrincipal(){
         case 1: {
             system("cls");
             jouerPartie();
+            menuPrincipal();
             break;
         }
         case 2:{
