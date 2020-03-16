@@ -1,6 +1,8 @@
 /*
- * Début d'en-tête
- * 2ème ligne
+ * Projet : Bataille Navale
+ * Auteur : Jonatan PERRET
+ * Version : 0.5
+ * Date : 16.03.20
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -153,13 +155,18 @@ void jouerPartie (){
             printf("\n");
         }
         if (Compteur < 5) {
-            printf("Ou voulez vous tirer ?\nVertical : (11 pour quitter)\n");
+            printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");
             scanf("%d", &Vertical);
             if (Vertical < 11) {
                 printf("Horizontal :\n");
                 scanf("%d", &Horizontal);
                 compteurJoueur += 1;
                 TableauJeu1[Vertical - 1][Horizontal - 1] += 2;
+            }
+            if (Vertical == 11){
+                system("cls");
+                printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                system("Pause");
             }
         } else {
             system("cls");
@@ -170,12 +177,15 @@ void jouerPartie (){
                    "\\  /\\  /_| |_| |\\  || |\\  || |___| |\\ \\ \n"
                    " \\/  \\/ \\___/\\_| \\_/\\_| \\_/\\____/\\_| \\_|\n"
                    "                                        \n");
-            printf("Vous avez gagne\n1 - Renvenir au menu principal\n2 - Quitter\n");
+            printf("Vous avez gagne\n1 - Rejouer\n2 - Renvenir au menu principal\n3 - Quitter\n");
             scanf("%d", &Choix);
             switch (Choix){
                 case 1:
+                    jouerPartie();
                     break;
                 case 2:
+                    break;
+                case 3:
                     exit(EXIT_SUCCESS);
             }
 
@@ -184,7 +194,7 @@ void jouerPartie (){
 
             }
     }
-    while ((Vertical < 11) && (Compteur < 5));
+    while ((Vertical < 12) && (Compteur < 5));
 
 
 
@@ -198,7 +208,7 @@ void menuPrincipal(){
     int Choix = 0;
     system("cls");
     printf("Bienvenu au menu principal,\nQue voulez vous faire ?\n");
-    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - \n");
+    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Paramètres\n4 - Quitter\n");
     scanf ("%d", &Choix);
     switch (Choix){
         case 1: {
@@ -210,13 +220,29 @@ void menuPrincipal(){
         case 2:{
             do {
                 system("cls");
-                printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis");
+                printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
                 printf("\n\nAppuyer sur 1 pour revenir au menu principale\n");
                 scanf("%d", &Choix);
                 if (Choix == 1) menuPrincipal();
             }
             while (Choix != 1);
         }
+        case 3:
+            system("cls");
+            printf("1 - Couleure de l'affichage\n2 - Parametre du compte");
+            scanf("%d", &Choix);
+            switch (Choix){
+                case 1:
+                    printf("1 - Rouge\n2 - Vert\n 3 - Bleu\n4 - ");
+                    break;
+
+
+
+            }
+            break;
+        case 4:
+            exit(EXIT_SUCCESS);
+            break;
         default:
         {
             system("cls");
@@ -237,7 +263,7 @@ int main() {
            "| |_) || (_| || |_ | (_| || || || ||  __/    | | | || (_| | \\ V / | (_| || ||  __/\n"
            "|_.__/  \\__,_| \\__| \\__,_||_||_||_| \\___|    |_| |_| \\__,_|  \\_/   \\__,_||_| \\___|\n");
     printf("Bonjour,\nBienvenue dans le jeu de la bataille navale.\nChoisissez une option :");
-    printf("\n1 - Se connecter\n2 - Creer un compte\n");
+    printf("\n1 - Se connecter\n2 - Creer un compte\n3 - Quitter\n");
     scanf("%d", &Choix);
     switch (Choix){
         case 1:
@@ -250,8 +276,12 @@ int main() {
             creerUnCompte();
             main();
             break;
+        case 3:
+            exit(EXIT_SUCCESS);
+            break;
         default:
             printf("Choix invalide");
+            system("Pause");
             system("cls");
             break;
     }
