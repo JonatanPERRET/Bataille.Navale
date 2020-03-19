@@ -33,7 +33,7 @@ void creerUnCompte (){
     //Logage de la création du compte
     FILE *Loger;
     Loger = fopen("LOG", "a");
-    fprintf(Loger, "\nL'utilisateur a creer son compte avec le nom : %s", UserName);
+    fprintf(Loger, "\nL'utilisateur : %s a creer son compte", UserName);
     fclose(Loger);
 }
 void seConnecter(){
@@ -75,8 +75,13 @@ void seConnecter(){
             fclose(User);
 
         }
-        else printf("Mot de passe incorect\n"); //si mot de passe incorect
-    }
+        else {
+            printf("Mot de passe incorect\n"); //si mot de passe incorect
+            printf("Appuyer pour vous reconnecter\n");
+            system("Pause");
+            seConnecter();
+        }
+        }
     else {//si l'utilisateur n'existe pas
         printf("Utilisateur non trouve\nVoulez vous creer un compte ? (1/0)\n");//demande si l'utilisateur veut créer un compte
         scanf("%d", &Choix);
@@ -95,11 +100,13 @@ void seConnecter(){
     }
     FILE *connecter;//Logage de la connexion
     connecter = fopen("LOG", "a");
-    fprintf(connecter, "\nL'utilisateur s'est connecte à son compte avec le nom : %s", UserName);
+    fprintf(connecter, "\nL'utilisateur : %s s'est connecté à son compte", UserName);
     fclose(connecter);
 }
 void jouerPartie (){
     //declaration des variables
+    char ActualUser[48] = {0};
+    char UserName[48] = {0};
     int Choix = 0;
     int Compteur = 0;
     int compteurJoueur = 0;
@@ -121,11 +128,25 @@ void jouerPartie (){
     int TableauJeu4 [10][10] = {0};
     int TableauJeu5 [10][10] = {0};
 
+    FILE *Actualuser;//Logage de la connexion
+    Actualuser = fopen("ActualUser", "r+");
+    fscanf(Actualuser, "%s", ActualUser);
+    fclose(Actualuser);
+    for (int i = 0; i < 48; i++){
+        UserName[i] = ActualUser[i];
+    }
+    FILE *JouerPartie;//Logage de Jouer partie
+    JouerPartie = fopen("LOG", "a");
+    fprintf(JouerPartie, "\nL'utilisateur : %s a lance une partie de bataille navale", UserName);
+    fclose(JouerPartie);
+
+
     do {
         system("cls");//efface l'interface
         printf("Voici le plateau :\n");
         printf("   1 2 3 4 5 6 7 8 9 10\n");
         //Affichage du tableau de jeu à l'utilisateur
+
         for (int i = 0; i < 10; i++) {
             printf("%2d ", i+1);
             for (int j = 0; j < 10; j++) {
@@ -178,13 +199,25 @@ void jouerPartie (){
                 scanf("%d", &Horizontal);
                 compteurJoueur += 1;
                 TableauJeu1[Vertical - 1][Horizontal - 1] += 2;
+                FILE *JouerPartie;//Logage de Jouer partie
+                JouerPartie = fopen("LOG", "a");
+                fprintf(JouerPartie, "\nL'utilisateur : %s a tiré au coordonnée : Vertical : %d, Horizontal : %d", UserName, Vertical, Horizontal);
+                fclose(JouerPartie);
             }
             if (Vertical == 11){//affichage de l'aide en jeu
+                FILE *Afficherlaide;//Logage de affichage de l'aide
+                Afficherlaide = fopen("LOG", "a");
+                fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
+                fclose(Afficherlaide);
                 system("cls");
                 printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
                 system("Pause");
             }
         } else { //affichage de l'écran quand on gagne
+            FILE *Gagner;//Logage de Jouer partie
+            Gagner = fopen("LOG", "a");
+            fprintf(Gagner, "\nL'utilisateur : %s a gagné une partie", UserName);
+            fclose(Gagner);
             system("cls");
             printf(" _    _ _____ _   _  _   _  ___________ \n"
                    "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
@@ -204,25 +237,32 @@ void jouerPartie (){
                 case 3:
                     exit(EXIT_SUCCESS);//quitte le programme
             }
-
-
-
-
             }
     }
     while ((Vertical < 12) && (Compteur < 5));//boucle pour jouer tant que l'on a pas gagné ou demandé de quitter
 
-
-
-
-
-
-
+    FILE *Quitter;//Logage de Jouer partie
+    Quitter = fopen("LOG", "a");
+    fprintf(Quitter, "\nL'utilisateur : %s a quitter l'ecran de jeu", UserName);
+    fclose(Quitter);
 }
 
 void menuPrincipal(){
     int Choix = 0;//déclaration des variables
+    char ActualUser[48] = {0};
+    char UserName[48] = {0};
+    FILE *Actualuser;//Logage du menu principal
+    Actualuser = fopen("ActualUser", "r+");
+    fscanf(Actualuser, "%s", ActualUser);
+    fclose(Actualuser);
+    for (int i = 0; i < 48; i++){
+        UserName[i] = ActualUser[i];
+    }
     system("cls");
+    FILE *MenuPrincipal;//Logage de Jouer partie
+    MenuPrincipal = fopen("LOG", "a");
+    fprintf(MenuPrincipal, "\nL'utilisateur : %s a affiché le menu principal", UserName);
+    fclose(MenuPrincipal);
     printf("Bienvenu au menu principal,\nQue voulez vous faire ?\n");//demande à l'utilisateur ce qu'il veut faire
     printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Paramètres\n4 - Quitter\n");
     scanf ("%d", &Choix);
@@ -237,6 +277,10 @@ void menuPrincipal(){
             do {
                 system("cls");//efface l'interface
                 //affichage de l'aide
+                FILE *Afficherlaide;//Logage de afficher l'aide
+                Afficherlaide = fopen("LOG", "a");
+                fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide", UserName);
+                fclose(Afficherlaide);
                 printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
                 printf("\n\nAppuyer sur 1 pour revenir au menu principale\n");
                 scanf("%d", &Choix);
@@ -244,7 +288,7 @@ void menuPrincipal(){
             }
             while (Choix != 1);
         }
-        /*case 3:
+        case 3:
             system("cls");//efface l'interface
             printf("1 - Couleure de l'affichage\n2 - Parametre du compte");
             scanf("%d", &Choix);
@@ -256,7 +300,7 @@ void menuPrincipal(){
 
 
             }
-            break;*/
+            break;
         case 4:
             exit(EXIT_SUCCESS);//quitte programme
             break;
@@ -295,9 +339,11 @@ int main() {
             break;
         case 3:
             exit(EXIT_SUCCESS);
+
             break;
         default:
             printf("Choix invalide");
+
             system("Pause");
             system("cls");//efface l'interface
             break;
