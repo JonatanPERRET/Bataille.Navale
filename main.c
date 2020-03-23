@@ -16,7 +16,7 @@ void creerUnCompte (){
     char Prenom[48];
     char MDP[48];
     //Demande les valeurs pour créer le compte
-    printf("Creer un compte, Entrez vos identifiants :\n");
+    printf("Creer un compte, Entrez vos identifiants : (sans espaces)\n");
     printf("Nom d'utilisateur :\n");
     scanf("%s", UserName);
     printf("Nom :\n");
@@ -110,6 +110,7 @@ void jouerPartie (){
     int Choix = 0;
     int Compteur = 0;
     int compteurJoueur = 0;
+    int Scores = 0;
     int Vertical = 0;
     int Horizontal = 0;
     int TableauJeu [10][10] = {0};
@@ -198,7 +199,9 @@ void jouerPartie (){
                 printf("Horizontal :\n");
                 scanf("%d", &Horizontal);
                 compteurJoueur += 1;
-                TableauJeu1[Vertical - 1][Horizontal - 1] += 2;
+                Scores++;
+                if (TableauJeu1[Vertical - 1][Horizontal - 1] == 1) TableauJeu1[Vertical - 1][Horizontal - 1] = 3;
+                if (TableauJeu1[Vertical - 1][Horizontal - 1] == 0) TableauJeu1[Vertical - 1][Horizontal - 1] = 2;
                 FILE *JouerPartie;//Logage de Jouer partie
                 JouerPartie = fopen("LOG", "a");
                 fprintf(JouerPartie, "\nL'utilisateur : %s a tiré au coordonnée : Vertical : %d, Horizontal : %d", UserName, Vertical, Horizontal);
@@ -218,6 +221,10 @@ void jouerPartie (){
             Gagner = fopen("LOG", "a");
             fprintf(Gagner, "\nL'utilisateur : %s a gagné une partie", UserName);
             fclose(Gagner);
+            FILE *Score;
+            Score = fopen("SCORES", "a");
+            fprintf(Score, "\n%s : %d", UserName, Scores);
+            fclose(Score);
             system("cls");
             printf(" _    _ _____ _   _  _   _  ___________ \n"
                    "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
@@ -251,6 +258,7 @@ void menuPrincipal(){
     int Choix = 0;//déclaration des variables
     char ActualUser[48] = {0};
     char UserName[48] = {0};
+    char Scores = 0;
     FILE *Actualuser;//Logage du menu principal
     Actualuser = fopen("ActualUser", "r+");
     fscanf(Actualuser, "%s", ActualUser);
@@ -264,7 +272,7 @@ void menuPrincipal(){
     fprintf(MenuPrincipal, "\nL'utilisateur : %s a affiché le menu principal", UserName);
     fclose(MenuPrincipal);
     printf("Bienvenu au menu principal,\nQue voulez vous faire ?\n");//demande à l'utilisateur ce qu'il veut faire
-    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Paramètres\n4 - Quitter\n");
+    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Afficher les scores\n4 - Paramètres\n5 - Quitter\n");
     scanf ("%d", &Choix);
     switch (Choix){
         case 1: {
@@ -287,8 +295,23 @@ void menuPrincipal(){
                 if (Choix == 1) menuPrincipal();//reour au menu principal
             }
             while (Choix != 1);
+            break;
         }
         case 3:
+            system("cls");
+            FILE *scores = NULL;
+            scores = fopen("SCORES", "r");
+            do {
+                Scores = fgetc(scores);
+                printf("%c", Scores);
+            }while (Scores != EOF);
+            printf("\n\n");
+            system("Pause");
+            menuPrincipal();
+            break;
+
+
+        case 4:
             system("cls");//efface l'interface
             printf("1 - Couleure de l'affichage\n2 - Parametre du compte");
             scanf("%d", &Choix);
@@ -301,7 +324,7 @@ void menuPrincipal(){
 
             }
             break;
-        case 4:
+        case 5:
             exit(EXIT_SUCCESS);//quitte programme
             break;
         default:
