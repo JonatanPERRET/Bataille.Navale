@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <string.h>
+#include <time.h>
 
 void creerUnCompte (){
     //déclaration des variables
@@ -113,7 +114,7 @@ void jouerPartie (){
     int Scores = 0;
     int Vertical = 0;
     int Horizontal = 0;
-    int TableauJeu [10][10] = {0};
+    int ChoixTableau = 0;
     int TableauJeu1 [10][10] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0,//création du tableau de jeu
                                 1, 1, 1, 1, 0, 0, 1, 0, 1, 0,
                                 0, 0, 0, 0, 0, 0, 1, 0, 1, 0,
@@ -124,12 +125,28 @@ void jouerPartie (){
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                 0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    int TableauJeu2 [10][10] = {0};
-    int TableauJeu3 [10][10] = {0};
-    int TableauJeu4 [10][10] = {0};
-    int TableauJeu5 [10][10] = {0};
+    int TableauJeu2 [10][10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 1, 0, 0, 0, 0, 0, 1, 1,
+                                0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+                                0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+                                0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+                                0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int TableauJeu3 [10][10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 1, 1, 1, 1, 1, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
+                                0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
+                                0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
+                                0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    FILE *Actualuser;//Logage de la connexion
+    FILE *Actualuser;//Logage de la partie
     Actualuser = fopen("ActualUser", "r+");
     fscanf(Actualuser, "%s", ActualUser);
     fclose(Actualuser);
@@ -140,118 +157,360 @@ void jouerPartie (){
     JouerPartie = fopen("LOG", "a");
     fprintf(JouerPartie, "\nL'utilisateur : %s a lance une partie de bataille navale", UserName);
     fclose(JouerPartie);
+    srand(time(NULL));
+    ChoixTableau = rand() % 4 + 1;
+    printf("%d", ChoixTableau);
+    system("Pause");
+    switch(ChoixTableau) {
+        case 1:
 
+            do {
+                system("cls");//efface l'interface
+                printf("Voici le plateau :\n");
+                printf("   1 2 3 4 5 6 7 8 9 10\n");
+                //Affichage du tableau de jeu à l'utilisateur
 
-    do {
-        system("cls");//efface l'interface
-        printf("Voici le plateau :\n");
-        printf("   1 2 3 4 5 6 7 8 9 10\n");
-        //Affichage du tableau de jeu à l'utilisateur
+                for (int i = 0; i < 10; i++) {
+                    printf("%2d ", i + 1);
+                    for (int j = 0; j < 10; j++) {
+                        if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) &&
+                            (TableauJeu1[4][9] == 3)) {//verification si le bateau est coulé
+                            TableauJeu1[4][7] = 5;
+                            TableauJeu1[4][8] = 5;
+                            TableauJeu1[4][9] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu1[1][0] == 3) && (TableauJeu1[1][1] == 3) && (TableauJeu1[1][2] == 3) &&
+                            (TableauJeu1[1][3] == 3)) {//verification si le bateau est coulé
+                            TableauJeu1[1][0] = 5;
+                            TableauJeu1[1][1] = 5;
+                            TableauJeu1[1][2] = 5;
+                            TableauJeu1[1][3] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu1[0][6] == 3) && (TableauJeu1[1][6] == 3) &&
+                            (TableauJeu1[2][6] == 3)) {//verification si le bateau est coulé
+                            TableauJeu1[0][6] = 5;
+                            TableauJeu1[1][6] = 5;
+                            TableauJeu1[2][6] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu1[8][4] == 3) && (TableauJeu1[8][5] == 3) && (TableauJeu1[8][6] == 3) &&
+                            (TableauJeu1[8][7] == 3) && (TableauJeu1[8][8] == 3)) {//verification si le bateau est coulé
+                            TableauJeu1[8][4] = 5;
+                            TableauJeu1[8][5] = 5;
+                            TableauJeu1[8][6] = 5;
+                            TableauJeu1[8][7] = 5;
+                            TableauJeu1[8][8] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu1[1][8] == 3) && (TableauJeu1[2][8] == 3)) {//verification si le bateau est coulé
+                            TableauJeu1[1][8] = 5;
+                            TableauJeu1[2][8] = 5;
+                            Compteur++;
+                        }
+                        //affichage du tableau en fonction de la valeur des cases
+                        if (TableauJeu1[i][j] == 0) printf("%c ", 255);
+                        if (TableauJeu1[i][j] == 1) printf("%c ", 255);
+                        if (TableauJeu1[i][j] == 2) printf("\033[34m%c \033[0m", 219);
+                        if (TableauJeu1[i][j] == 3) printf("\033[31m%c \033[0m", 219);
+                        if (TableauJeu1[i][j] == 5) printf("\033[32m%c \033[0m", 219);
+                    }
+                    printf("\n");//affichage du retour à la ligne
+                }
+                if (Compteur < 5) {
+                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
+                    scanf("%d", &Vertical);
+                    if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
+                        printf("Horizontal :\n");
+                        scanf("%d", &Horizontal);
+                        compteurJoueur += 1;
+                        Scores++;
+                        if (TableauJeu1[Vertical - 1][Horizontal - 1] == 1)
+                            TableauJeu1[Vertical - 1][Horizontal - 1] = 3;
+                        if (TableauJeu1[Vertical - 1][Horizontal - 1] == 0)
+                            TableauJeu1[Vertical - 1][Horizontal - 1] = 2;
+                        FILE *JouerPartie;//Logage de Jouer partie
+                        JouerPartie = fopen("LOG", "a");
+                        fprintf(JouerPartie,
+                                "\nL'utilisateur : %s a tiré au coordonnée : Vertical : %d, Horizontal : %d",
+                                UserName, Vertical, Horizontal);
+                        fclose(JouerPartie);
+                    }
+                    if (Vertical == 11) {//affichage de l'aide en jeu
+                        FILE *Afficherlaide;//Logage de affichage de l'aide
+                        Afficherlaide = fopen("LOG", "a");
+                        fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
+                        fclose(Afficherlaide);
+                        system("cls");
+                        printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                        system("Pause");
+                    }
+                } else { //affichage de l'écran quand on gagne
+                    FILE *Gagner;//Logage de Jouer partie
+                    Gagner = fopen("LOG", "a");
+                    fprintf(Gagner, "\nL'utilisateur : %s a gagné une partie", UserName);
+                    fclose(Gagner);
+                    FILE *Score;
+                    Score = fopen("SCORES", "a");
+                    fprintf(Score, "\n%s : %d", UserName, Scores);
+                    fclose(Score);
+                    system("cls");
+                    printf(" _    _ _____ _   _  _   _  ___________ \n"
+                           "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
+                           "| |  | | | | |  \\| ||  \\| || |__ | |_/ /\n"
+                           "| |/\\| | | | | . ` || . ` ||  __||    / \n"
+                           "\\  /\\  /_| |_| |\\  || |\\  || |___| |\\ \\ \n"
+                           " \\/  \\/ \\___/\\_| \\_/\\_| \\_/\\____/\\_| \\_|\n"
+                           "                                        \n");
+                    printf("Vous avez gagne\n1 - Rejouer\n2 - Renvenir au menu principal\n3 - Quitter\n");//demande à l'utilisateur si il veut rejouer, revenir au menu principal ou quitter
+                    scanf("%d", &Choix);
+                    switch (Choix) {
+                        case 1:
+                            jouerPartie();//rejouer
+                            break;
+                        case 2:
+                            break;//revient au menu principale
+                        case 3:
+                            exit(EXIT_SUCCESS);//quitte le programme
+                    }
+                }
+            } while ((Vertical < 12) && (Compteur < 5));//boucle pour jouer tant que l'on a pas gagné ou demandé de quitter
+                     break;
+        case 2:
+            do {
+                system("cls");//efface l'interface
+                printf("Voici le plateau :\n");
+                printf("   1 2 3 4 5 6 7 8 9 10\n");
+                //Affichage du tableau de jeu à l'utilisateur
 
-        for (int i = 0; i < 10; i++) {
-            printf("%2d ", i+1);
-            for (int j = 0; j < 10; j++) {
-                if ((TableauJeu1[4][7] == 3) && (TableauJeu1[4][8] == 3) && (TableauJeu1[4][9] == 3)){//verification si le bateau est coulé
-                    TableauJeu1[4][7] = 5;
-                    TableauJeu1[4][8] = 5;
-                    TableauJeu1[4][9] = 5;
-                    Compteur++;
+                for (int i = 0; i < 10; i++) {
+                    printf("%2d ", i + 1);
+                    for (int j = 0; j < 10; j++) {
+                        if ((TableauJeu2[7][0] == 3) && (TableauJeu2[7][1] == 3) &&
+                            (TableauJeu2[7][2] == 3)) {//verification si le bateau est coulé
+                            TableauJeu2[7][0] = 5;
+                            TableauJeu2[7][1] = 5;
+                            TableauJeu2[7][2] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu2[2][7] == 3) && (TableauJeu2[3][7] == 3) && (TableauJeu2[4][7] == 3) &&
+                            (TableauJeu2[5][7] == 3)) {//verification si le bateau est coulé
+                            TableauJeu2[2][7] = 5;
+                            TableauJeu2[3][7] = 5;
+                            TableauJeu2[4][7] = 5;
+                            TableauJeu2[5][7] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu2[8][6] == 3) && (TableauJeu2[8][7] == 3) &&
+                            (TableauJeu2[8][8] == 3)) {//verification si le bateau est coulé
+                            TableauJeu2[8][6] = 5;
+                            TableauJeu2[8][7] = 5;
+                            TableauJeu2[8][8] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu2[1][2] == 3) && (TableauJeu2[2][2] == 3) && (TableauJeu2[3][2] == 3) &&
+                            (TableauJeu2[4][2] == 3) && (TableauJeu2[5][2] == 3)) {//verification si le bateau est coulé
+                            TableauJeu2[1][2] = 5;
+                            TableauJeu2[2][2] = 5;
+                            TableauJeu2[3][2] = 5;
+                            TableauJeu2[4][2] = 5;
+                            TableauJeu2[5][2] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu2[1][8] == 3) && (TableauJeu2[1][9] == 3)) {//verification si le bateau est coulé
+                            TableauJeu2[1][9] = 5;
+                            TableauJeu2[1][8] = 5;
+                            Compteur++;
+                        }
+                        //affichage du tableau en fonction de la valeur des cases
+                        if (TableauJeu2[i][j] == 0) printf("%c ", 255);
+                        if (TableauJeu2[i][j] == 1) printf("%c ", 255);
+                        if (TableauJeu2[i][j] == 2) printf("\033[34m%c \033[0m", 219);
+                        if (TableauJeu2[i][j] == 3) printf("\033[31m%c \033[0m", 219);
+                        if (TableauJeu2[i][j] == 5) printf("\033[32m%c \033[0m", 219);
+                    }
+                    printf("\n");//affichage du retour à la ligne
                 }
-                if ((TableauJeu1[1][0] == 3) && (TableauJeu1[1][1] == 3) && (TableauJeu1[1][2] == 3) && (TableauJeu1[1][3] == 3)){//verification si le bateau est coulé
-                    TableauJeu1[1][0] = 5;
-                    TableauJeu1[1][1] = 5;
-                    TableauJeu1[1][2] = 5;
-                    TableauJeu1[1][3] = 5;
-                    Compteur++;
+                if (Compteur < 5) {
+                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
+                    scanf("%d", &Vertical);
+                    if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
+                        printf("Horizontal :\n");
+                        scanf("%d", &Horizontal);
+                        compteurJoueur += 1;
+                        Scores++;
+                        if (TableauJeu2[Vertical - 1][Horizontal - 1] == 1)
+                            TableauJeu2[Vertical - 1][Horizontal - 1] = 3;
+                        if (TableauJeu2[Vertical - 1][Horizontal - 1] == 0)
+                            TableauJeu2[Vertical - 1][Horizontal - 1] = 2;
+                        FILE *JouerPartie;//Logage de Jouer partie
+                        JouerPartie = fopen("LOG", "a");
+                        fprintf(JouerPartie,
+                                "\nL'utilisateur : %s a tiré au coordonnée : Vertical : %d, Horizontal : %d",
+                                UserName, Vertical, Horizontal);
+                        fclose(JouerPartie);
+                    }
+                    if (Vertical == 11) {//affichage de l'aide en jeu
+                        FILE *Afficherlaide;//Logage de affichage de l'aide
+                        Afficherlaide = fopen("LOG", "a");
+                        fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
+                        fclose(Afficherlaide);
+                        system("cls");
+                        printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                        system("Pause");
+                    }
+                } else { //affichage de l'écran quand on gagne
+                    FILE *Gagner;//Logage de Jouer partie
+                    Gagner = fopen("LOG", "a");
+                    fprintf(Gagner, "\nL'utilisateur : %s a gagné une partie", UserName);
+                    fclose(Gagner);
+                    FILE *Score;
+                    Score = fopen("SCORES", "a");
+                    fprintf(Score, "\n%s : %d", UserName, Scores);
+                    fclose(Score);
+                    system("cls");
+                    printf(" _    _ _____ _   _  _   _  ___________ \n"
+                           "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
+                           "| |  | | | | |  \\| ||  \\| || |__ | |_/ /\n"
+                           "| |/\\| | | | | . ` || . ` ||  __||    / \n"
+                           "\\  /\\  /_| |_| |\\  || |\\  || |___| |\\ \\ \n"
+                           " \\/  \\/ \\___/\\_| \\_/\\_| \\_/\\____/\\_| \\_|\n"
+                           "                                        \n");
+                    printf("Vous avez gagne\n1 - Rejouer\n2 - Renvenir au menu principal\n3 - Quitter\n");//demande à l'utilisateur si il veut rejouer, revenir au menu principal ou quitter
+                    scanf("%d", &Choix);
+                    switch (Choix) {
+                        case 1:
+                            jouerPartie();//rejouer
+                            break;
+                        case 2:
+                            break;//revient au menu principale
+                        case 3:
+                            exit(EXIT_SUCCESS);//quitte le programme
+                    }
                 }
-                if ((TableauJeu1[0][6] == 3) && (TableauJeu1[1][6] == 3) && (TableauJeu1[2][6] == 3)){//verification si le bateau est coulé
-                    TableauJeu1[0][6] = 5;
-                    TableauJeu1[1][6] = 5;
-                    TableauJeu1[2][6] = 5;
-                    Compteur++;
+            } while ((Vertical < 12) && (Compteur < 5));//boucle pour jouer tant que l'on a pas gagné ou demandé de quitter
+            break;
+        case 3:
+            do {
+                system("cls");//efface l'interface
+                printf("Voici le plateau :\n");
+                printf("   1 2 3 4 5 6 7 8 9 10\n");
+                //Affichage du tableau de jeu à l'utilisateur
+
+                for (int i = 0; i < 10; i++) {
+                    printf("%2d ", i + 1);
+                    for (int j = 0; j < 10; j++) {
+                        if ((TableauJeu3[1][1] == 3) && (TableauJeu3[1][2] == 3) &&
+                            (TableauJeu3[1][3] == 3)) {//verification si le bateau est coulé
+                            TableauJeu3[1][1] = 5;
+                            TableauJeu3[1][2] = 5;
+                            TableauJeu3[1][3] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu3[5][9] == 3) && (TableauJeu3[6][9] == 3) && (TableauJeu3[7][9] == 3) &&
+                            (TableauJeu3[8][9] == 3)) {//verification si le bateau est coulé
+                            TableauJeu3[5][9] = 5;
+                            TableauJeu3[6][9] = 5;
+                            TableauJeu3[7][9] = 5;
+                            TableauJeu3[8][9] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu3[6][5] == 3) && (TableauJeu3[7][5] == 3) &&
+                            (TableauJeu3[8][5] == 3)) {//verification si le bateau est coulé
+                            TableauJeu3[6][5] = 5;
+                            TableauJeu3[7][5] = 5;
+                            TableauJeu3[8][5] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu3[2][4] == 3) && (TableauJeu3[2][5] == 3) && (TableauJeu3[2][6] == 3) &&
+                            (TableauJeu3[2][7] == 3) && (TableauJeu3[52][8] == 3)) {//verification si le bateau est coulé
+                            TableauJeu3[2][4] = 5;
+                            TableauJeu3[8][5] = 5;
+                            TableauJeu3[8][6] = 5;
+                            TableauJeu3[8][7] = 5;
+                            TableauJeu3[8][8] = 5;
+                            Compteur++;
+                        }
+                        if ((TableauJeu3[5][2] == 3) && (TableauJeu3[5][3] == 3)) {//verification si le bateau est coulé
+                            TableauJeu3[5][2] = 5;
+                            TableauJeu3[5][3] = 5;
+                            Compteur++;
+                        }
+                        //affichage du tableau en fonction de la valeur des cases
+                        if (TableauJeu3[i][j] == 0) printf("%c ", 255);
+                        if (TableauJeu3[i][j] == 1) printf("%c ", 255);
+                        if (TableauJeu3[i][j] == 2) printf("\033[34m%c \033[0m", 219);
+                        if (TableauJeu3[i][j] == 3) printf("\033[31m%c \033[0m", 219);
+                        if (TableauJeu3[i][j] == 5) printf("\033[32m%c \033[0m", 219);
+                    }
+                    printf("\n");//affichage du retour à la ligne
                 }
-                if ((TableauJeu1[8][4] == 3) && (TableauJeu1[8][5] == 3) && (TableauJeu1[8][6] == 3) && (TableauJeu1[8][7] == 3) && (TableauJeu1[8][8] == 3)){//verification si le bateau est coulé
-                    TableauJeu1[8][4] = 5;
-                    TableauJeu1[8][5] = 5;
-                    TableauJeu1[8][6] = 5;
-                    TableauJeu1[8][7] = 5;
-                    TableauJeu1[8][8] = 5;
-                    Compteur++;
+                if (Compteur < 5) {
+                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
+                    scanf("%d", &Vertical);
+                    if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
+                        printf("Horizontal :\n");
+                        scanf("%d", &Horizontal);
+                        compteurJoueur += 1;
+                        Scores++;
+                        if (TableauJeu3[Vertical - 1][Horizontal - 1] == 1)
+                            TableauJeu3[Vertical - 1][Horizontal - 1] = 3;
+                        if (TableauJeu3[Vertical - 1][Horizontal - 1] == 0)
+                            TableauJeu3[Vertical - 1][Horizontal - 1] = 2;
+                        FILE *JouerPartie;//Logage de Jouer partie
+                        JouerPartie = fopen("LOG", "a");
+                        fprintf(JouerPartie,
+                                "\nL'utilisateur : %s a tiré au coordonnée : Vertical : %d, Horizontal : %d",
+                                UserName, Vertical, Horizontal);
+                        fclose(JouerPartie);
+                    }
+                    if (Vertical == 11) {//affichage de l'aide en jeu
+                        FILE *Afficherlaide;//Logage de affichage de l'aide
+                        Afficherlaide = fopen("LOG", "a");
+                        fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
+                        fclose(Afficherlaide);
+                        system("cls");
+                        printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                        system("Pause");
+                    }
+                } else { //affichage de l'écran quand on gagne
+                    FILE *Gagner;//Logage de Jouer partie
+                    Gagner = fopen("LOG", "a");
+                    fprintf(Gagner, "\nL'utilisateur : %s a gagné une partie", UserName);
+                    fclose(Gagner);
+                    FILE *Score;
+                    Score = fopen("SCORES", "a");
+                    fprintf(Score, "\n%s : %d", UserName, Scores);
+                    fclose(Score);
+                    system("cls");
+                    printf(" _    _ _____ _   _  _   _  ___________ \n"
+                           "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
+                           "| |  | | | | |  \\| ||  \\| || |__ | |_/ /\n"
+                           "| |/\\| | | | | . ` || . ` ||  __||    / \n"
+                           "\\  /\\  /_| |_| |\\  || |\\  || |___| |\\ \\ \n"
+                           " \\/  \\/ \\___/\\_| \\_/\\_| \\_/\\____/\\_| \\_|\n"
+                           "                                        \n");
+                    printf("Vous avez gagne\n1 - Rejouer\n2 - Renvenir au menu principal\n3 - Quitter\n");//demande à l'utilisateur si il veut rejouer, revenir au menu principal ou quitter
+                    scanf("%d", &Choix);
+                    switch (Choix) {
+                        case 1:
+                            jouerPartie();//rejouer
+                            break;
+                        case 2:
+                            break;//revient au menu principale
+                        case 3:
+                            exit(EXIT_SUCCESS);//quitte le programme
+                    }
                 }
-                if ((TableauJeu1[1][8] == 3) && (TableauJeu1[2][8] == 3)){//verification si le bateau est coulé
-                    TableauJeu1[1][8] = 5;
-                    TableauJeu1[2][8] = 5;
-                    Compteur++;
-                }
-                //affichage du tableau en fonction de la valeur des cases
-                if (TableauJeu1[i][j]==0) printf("%c ", 255);
-                if (TableauJeu1[i][j]==1) printf("%c ", 255);
-                if (TableauJeu1[i][j]==2) printf("\033[34m%c \033[0m", 219);
-                if (TableauJeu1[i][j]==3) printf("\033[31m%c \033[0m", 219);
-                if (TableauJeu1[i][j]==5) printf("\033[32m%c \033[0m", 219);
-            }
-            printf("\n");//affichage du retour à la ligne
-        }
-        if (Compteur < 5) {
-            printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
-            scanf("%d", &Vertical);
-            if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
-                printf("Horizontal :\n");
-                scanf("%d", &Horizontal);
-                compteurJoueur += 1;
-                Scores++;
-                if (TableauJeu1[Vertical - 1][Horizontal - 1] == 1) TableauJeu1[Vertical - 1][Horizontal - 1] = 3;
-                if (TableauJeu1[Vertical - 1][Horizontal - 1] == 0) TableauJeu1[Vertical - 1][Horizontal - 1] = 2;
-                FILE *JouerPartie;//Logage de Jouer partie
-                JouerPartie = fopen("LOG", "a");
-                fprintf(JouerPartie, "\nL'utilisateur : %s a tiré au coordonnée : Vertical : %d, Horizontal : %d", UserName, Vertical, Horizontal);
-                fclose(JouerPartie);
-            }
-            if (Vertical == 11){//affichage de l'aide en jeu
-                FILE *Afficherlaide;//Logage de affichage de l'aide
-                Afficherlaide = fopen("LOG", "a");
-                fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
-                fclose(Afficherlaide);
-                system("cls");
-                printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
-                system("Pause");
-            }
-        } else { //affichage de l'écran quand on gagne
-            FILE *Gagner;//Logage de Jouer partie
-            Gagner = fopen("LOG", "a");
-            fprintf(Gagner, "\nL'utilisateur : %s a gagné une partie", UserName);
-            fclose(Gagner);
-            FILE *Score;
-            Score = fopen("SCORES", "a");
-            fprintf(Score, "\n%s : %d", UserName, Scores);
-            fclose(Score);
-            system("cls");
-            printf(" _    _ _____ _   _  _   _  ___________ \n"
-                   "| |  | |_   _| \\ | || \\ | ||  ___| ___ \\\n"
-                   "| |  | | | | |  \\| ||  \\| || |__ | |_/ /\n"
-                   "| |/\\| | | | | . ` || . ` ||  __||    / \n"
-                   "\\  /\\  /_| |_| |\\  || |\\  || |___| |\\ \\ \n"
-                   " \\/  \\/ \\___/\\_| \\_/\\_| \\_/\\____/\\_| \\_|\n"
-                   "                                        \n");
-            printf("Vous avez gagne\n1 - Rejouer\n2 - Renvenir au menu principal\n3 - Quitter\n");//demande à l'utilisateur si il veut rejouer, revenir au menu principal ou quitter
-            scanf("%d", &Choix);
-            switch (Choix){
-                case 1:
-                    jouerPartie();//rejouer
-                    break;
-                case 2:
-                    break;//revient au menu principale
-                case 3:
-                    exit(EXIT_SUCCESS);//quitte le programme
-            }
-            }
+            } while ((Vertical < 12) && (Compteur < 5));//boucle pour jouer tant que l'on a pas gagné ou demandé de quitter
+            break;
     }
-    while ((Vertical < 12) && (Compteur < 5));//boucle pour jouer tant que l'on a pas gagné ou demandé de quitter
 
-    FILE *Quitter;//Logage de Jouer partie
-    Quitter = fopen("LOG", "a");
-    fprintf(Quitter, "\nL'utilisateur : %s a quitter l'ecran de jeu", UserName);
-    fclose(Quitter);
+        FILE *Quitter;//Logage de Jouer partie
+        Quitter = fopen("LOG", "a");
+        fprintf(Quitter, "\nL'utilisateur : %s a quitter l'ecran de jeu", UserName);
+        fclose(Quitter);
 }
 
 void menuPrincipal(){
@@ -272,7 +531,7 @@ void menuPrincipal(){
     fprintf(MenuPrincipal, "\nL'utilisateur : %s a affiché le menu principal", UserName);
     fclose(MenuPrincipal);
     printf("Bienvenu au menu principal,\nQue voulez vous faire ?\n");//demande à l'utilisateur ce qu'il veut faire
-    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Afficher les scores\n4 - Paramètres\n5 - Quitter\n");
+    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Afficher les scores\n4 - Parametres\n5 - Quitter\n");
     scanf ("%d", &Choix);
     switch (Choix){
         case 1: {
@@ -313,15 +572,37 @@ void menuPrincipal(){
 
         case 4:
             system("cls");//efface l'interface
-            printf("1 - Couleure de l'affichage\n2 - Parametre du compte");
+            printf("1 - Couleure de l'interface\n2 - Parametres du compte\n");
             scanf("%d", &Choix);
             switch (Choix){
                 case 1:
-                    printf("1 - Rouge\n2 - Vert\n 3 - Bleu\n4 - ");
+                    system("cls");
+                    printf("1 - Rouge\n2 - Vert\n3 - Bleu\n4 - Jaune\n5 - Default\nChoix :\n");
+                    scanf("%d", &Choix);
+                    switch (Choix){
+                        case 1:
+                            system("Color 4");
+                            break;
+                        case 2:
+                            system("Color 2");
+                            break;
+                        case 3 :
+                            system("Color 1");
+                            break;
+                        case 4 :
+                            system("Color 6");
+                            break;
+                            case 5:
+                            system("Color F");
+                            break;
+                    }
                     break;
+                case 2:
+                    system("cls");
 
 
 
+                    break;
             }
             break;
         case 5:
@@ -333,6 +614,7 @@ void menuPrincipal(){
             menuPrincipal();//si le nombre n'est corect, réaffiche le menu principale
         }
     }
+    menuPrincipal();
 
 }
 
