@@ -21,11 +21,11 @@ void creerUnCompte (){
     printf("Nom d'utilisateur :\n");
     scanf("%s", UserName);
     printf("Nom :\n");
-    scanf("%s", &Name);
+    scanf("%s", Name);
     printf("Prenom :\n");
-    scanf("%s", &Prenom);
+    scanf("%s", Prenom);
     printf("Mot de passe :\n");
-    scanf("%s", &MDP);
+    scanf("%s", MDP);
     //création du fichier d'utilisateur
     FILE *User = NULL;
     User = fopen(UserName, "w");
@@ -49,7 +49,7 @@ void seConnecter(){
     system("cls"); //efface l'intérface
     //Demande à l'utilisateur le nom d'utilisateur pour se connecter
     printf("Nom d'utilisateur :\n");
-    scanf("%s", &UserName);
+    scanf("%s", UserName);
     //ouvre le fichier d'utilisateur et met les valeurs dans des variables
     FILE *User = NULL;
     User = fopen(UserName, "r+");
@@ -68,12 +68,11 @@ void seConnecter(){
             }
         }
         if (VerifMDP == 48){
-            FILE *User = NULL;
+            FILE *User2 = NULL;
             remove("ActualUser");//écrit das le fichier l'utilisateur actuel
-            User = fopen("ActualUser", "w");
-
-            fprintf(User, "%s", UserName);
-            fclose(User);
+            User2 = fopen("ActualUser", "w");
+            fprintf(User2, "%s", UserName);
+            fclose(User2);
 
         }
         else {
@@ -157,8 +156,8 @@ void jouerPartie (){
     JouerPartie = fopen("LOG", "a");
     fprintf(JouerPartie, "\nL'utilisateur : %s a lance une partie de bataille navale", UserName);
     fclose(JouerPartie);
-    srand(time(NULL));
-    ChoixTableau = rand() % 4 + 1;
+    srand((unsigned)time(NULL));
+    ChoixTableau = 1 + rand() % 3;
     printf("%d", ChoixTableau);
     system("Pause");
     switch(ChoixTableau) {
@@ -517,10 +516,16 @@ void menuPrincipal(){
     int Choix = 0;//déclaration des variables
     char ActualUser[48] = {0};
     char UserName[48] = {0};
+    char Name[48] = {0};
+    char Prenom[48] = {0};
+    char MDP[48] = {0};
     char Scores = 0;
     FILE *Actualuser;//Logage du menu principal
     Actualuser = fopen("ActualUser", "r+");
     fscanf(Actualuser, "%s", ActualUser);
+    fscanf(Actualuser, "%s", &Name);
+    fscanf(Actualuser, "%s", &Prenom);
+    fscanf(Actualuser, "%s", &MDP);
     fclose(Actualuser);
     for (int i = 0; i < 48; i++){
         UserName[i] = ActualUser[i];
@@ -548,7 +553,7 @@ void menuPrincipal(){
                 Afficherlaide = fopen("LOG", "a");
                 fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide", UserName);
                 fclose(Afficherlaide);
-                printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                printf("Le jeu de la bataille navale est très simple, \nIl suffit de détruire tout les bateaux en touchant chaque partie du bateaux,\nil y a différents types de bateaux : \n1 porte- avions (5 cases), \nun croiseur (4 cases), \nun sous-marin (3 cases), \nun contre-torpilleur (3 cases) et \nun torpilleur (2 cases), \nles règles sont simple : \ncouler tout les bateaux. \nLe premier nombre à mettre est celui de gauche ensuite celui du haut.");
                 printf("\n\nAppuyer sur 1 pour revenir au menu principale\n");
                 scanf("%d", &Choix);
                 if (Choix == 1) menuPrincipal();//reour au menu principal
@@ -564,6 +569,7 @@ void menuPrincipal(){
                 Scores = fgetc(scores);
                 printf("%c", Scores);
             }while (Scores != EOF);
+            fclose(scores);
             printf("\n\n");
             system("Pause");
             menuPrincipal();
@@ -599,15 +605,40 @@ void menuPrincipal(){
                     break;
                 case 2:
                     system("cls");
+                    printf("Que voulez vous changer ?\n1 - Nom d'utilisateur\n2 - Nom\n3 - Prénom\n4 - Mot de passe\n5 - Confirmer");
+                    scanf("%d", &Choix);
+                    system("cls");
+                    switch (Choix){
+                        case 1:
+                            printf("Nom d'utilisateur :\n");
+                            scanf("%s", UserName);
+                            break;
+                        case 2:
+                            printf("Nom :\n");
+                            scanf("%s", Name);
+                            break;
+                        case 3:
+                            printf("prénom :\n");
+                            scanf("%s", Prenom);
+                            break;
+                        case 4:
+                            printf("Mot de passe :\n");
+                            scanf("%s", MDP);
+                            break;
+                        /*case 5:
+                            FILE *CACA;
+                            CACA = fopen("UserName", "w");
+                            fclose(CACA);
 
 
+                            break;*/
+                    }
 
                     break;
             }
             break;
         case 5:
             exit(EXIT_SUCCESS);//quitte programme
-            break;
         default:
         {
             system("cls");//efface l'interface
