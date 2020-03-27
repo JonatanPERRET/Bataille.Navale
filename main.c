@@ -514,6 +514,7 @@ void jouerPartie (){
 
 void menuPrincipal(){
     int Choix = 0;//déclaration des variables
+    int Choix2 = 0;
     char ActualUser[48] = {0};
     char UserName[48] = {0};
     char Name[48] = {0};
@@ -605,10 +606,10 @@ void menuPrincipal(){
                     break;
                 case 2:
                     system("cls");
-                    printf("Que voulez vous changer ?\n1 - Nom d'utilisateur\n2 - Nom\n3 - Prénom\n4 - Mot de passe\n5 - Confirmer");
-                    scanf("%d", &Choix);
+                    printf("Que voulez vous changer ?\n1 - Nom d'utilisateur\n2 - Nom\n3 - Prénom\n4 - Mot de passe\n5 - Confirmer\n");
+                    scanf("%d", &Choix2);
                     system("cls");
-                    switch (Choix){
+                    switch (Choix2){
                         case 1:
                             printf("Nom d'utilisateur :\n");
                             scanf("%s", UserName);
@@ -625,15 +626,18 @@ void menuPrincipal(){
                             printf("Mot de passe :\n");
                             scanf("%s", MDP);
                             break;
-                        /*case 5:
-                            FILE *CACA;
-                            CACA = fopen("UserName", "w");
-                            fclose(CACA);
+                        case 5:;
+                            FILE *confirmer = NULL;
+                            confirmer = fopen(UserName, "w");
+                            fclose(confirmer);
+                            break;
+                        default:
 
-
-                            break;*/
+                        break;
                     }
 
+                    break;
+                default:
                     break;
             }
             break;
