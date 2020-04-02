@@ -71,7 +71,10 @@ void seConnecter(){
             FILE *User2 = NULL;
             remove("ActualUser");//écrit das le fichier l'utilisateur actuel
             User2 = fopen("ActualUser", "w");
-            fprintf(User2, "%s", UserName);
+            fprintf(User2, "%s\n", UserName);
+            fprintf(User2, "%s\n", Name);
+            fprintf(User2, "%s\n", Prenom);
+            fprintf(User2, "%s\n", MDP);
             fclose(User2);
 
         }
@@ -524,15 +527,15 @@ void menuPrincipal(){
     FILE *Actualuser;//Logage du menu principal
     Actualuser = fopen("ActualUser", "r+");
     fscanf(Actualuser, "%s", ActualUser);
-    fscanf(Actualuser, "%s", &Name);
-    fscanf(Actualuser, "%s", &Prenom);
-    fscanf(Actualuser, "%s", &MDP);
+    fscanf(Actualuser, "%s", Name);
+    fscanf(Actualuser, "%s", Prenom);
+    fscanf(Actualuser, "%s", MDP);
     fclose(Actualuser);
     for (int i = 0; i < 48; i++){
         UserName[i] = ActualUser[i];
     }
     system("cls");
-    FILE *MenuPrincipal;//Logage de Jouer partie
+    FILE *MenuPrincipal;//Logage du menu principal
     MenuPrincipal = fopen("LOG", "a");
     fprintf(MenuPrincipal, "\nL'utilisateur : %s a affiché le menu principal", UserName);
     fclose(MenuPrincipal);
@@ -579,6 +582,10 @@ void menuPrincipal(){
 
         case 4:
             system("cls");//efface l'interface
+            FILE *Param;//Logage de l'ouverture des parametres
+            Param = fopen("LOG", "a");
+            fprintf(Param, "\nL'utilisateur : %s a afficher les parametres", UserName);
+            fclose(Param);
             printf("1 - Couleure de l'interface\n2 - Parametres du compte\n");
             scanf("%d", &Choix);
             switch (Choix){
@@ -589,56 +596,90 @@ void menuPrincipal(){
                     switch (Choix){
                         case 1:
                             system("Color 4");
+                            FILE *colorChange1;//Logage du changement de couleur
+                            colorChange1 = fopen("LOG", "a");
+                            fprintf(colorChange1, "\nL'utilisateur : %s a changer la couleur en rouge", UserName);
+                            fclose(colorChange1);
                             break;
                         case 2:
                             system("Color 2");
+                            FILE *colorChange2;//Logage du changement de couleur
+                            colorChange2 = fopen("LOG", "a");
+                            fprintf(colorChange2, "\nL'utilisateur : %s a changer la couleur en vert", UserName);
+                            fclose(colorChange2);
                             break;
                         case 3 :
                             system("Color 1");
+                            FILE *colorChange3;//Logage du changement de couleur
+                            colorChange3 = fopen("LOG", "a");
+                            fprintf(colorChange3, "\nL'utilisateur : %s a changer la couleur en bleu", UserName);
+                            fclose(colorChange3);
                             break;
                         case 4 :
                             system("Color 6");
+                            FILE *colorChange4;//Logage du changement de couleur
+                            colorChange4 = fopen("LOG", "a");
+                            fprintf(colorChange4, "\nL'utilisateur : %s a changer la couleur en jaune", UserName);
+                            fclose(colorChange4);
                             break;
                             case 5:
                             system("Color F");
+                            FILE *colorChange5;//Logage du changement de couleur
+                            colorChange5 = fopen("LOG", "a");
+                            fprintf(colorChange5, "\nL'utilisateur : %s a changer la couleur en blanc", UserName);
+                            fclose(colorChange5);
                             break;
                     }
                     break;
                 case 2:
+                    do{
                     system("cls");
-                    printf("Que voulez vous changer ?\n1 - Nom d'utilisateur\n2 - Nom\n3 - Prénom\n4 - Mot de passe\n5 - Confirmer\n");
+                    printf("Que voulez vous changer ?\n1 - Nom d'utilisateur\n2 - Nom\n3 - Prenom\n4 - Mot de passe\n5 - Quitter\n");
                     scanf("%d", &Choix2);
                     system("cls");
-                    switch (Choix2){
+                    switch (Choix2) {
                         case 1:
                             printf("Nom d'utilisateur :\n");
                             scanf("%s", UserName);
+                            FILE *confirmer1 = NULL;
+                            confirmer1 = fopen(UserName, "w");
+                            fprintf(confirmer1, "%s\n%s\n%s\n%s", UserName, Name, Prenom, MDP);
+                            fclose(confirmer1);
                             break;
                         case 2:
                             printf("Nom :\n");
                             scanf("%s", Name);
+                            FILE *confirmer2 = NULL;
+                            confirmer2 = fopen(UserName, "w");
+                            fprintf(confirmer2, "%s\n%s\n%s\n%s", UserName, Name, Prenom, MDP);
+                            fclose(confirmer2);
                             break;
                         case 3:
-                            printf("prénom :\n");
+                            printf("prenom :\n");
                             scanf("%s", Prenom);
+                            FILE *confirmer3 = NULL;
+                            confirmer3 = fopen(UserName, "w");
+                            fprintf(confirmer3, "%s\n%s\n%s\n%s", UserName, Name, Prenom, MDP);
+                            fclose(confirmer3);
                             break;
                         case 4:
                             printf("Mot de passe :\n");
                             scanf("%s", MDP);
-                            break;
-                        case 5:;
-                            FILE *confirmer = NULL;
-                            confirmer = fopen(UserName, "w");
-                            fclose(confirmer);
+                            FILE *confirmer4 = NULL;
+                            confirmer4 = fopen(UserName, "w");
+                            fprintf(confirmer4, "%s\n%s\n%s\n%s", UserName, Name, Prenom, MDP);
+                            fclose(confirmer4);
                             break;
                         default:
 
-                        break;
-                    }
+                            break;
 
+                    }
+                    }while (Choix2 < 5);
                     break;
                 default:
                     break;
+
             }
             break;
         case 5:
