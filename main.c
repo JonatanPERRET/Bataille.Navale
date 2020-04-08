@@ -161,8 +161,6 @@ void jouerPartie (){
     fclose(JouerPartie);
     srand((unsigned)time(NULL));
     ChoixTableau = 1 + rand() % 3;
-    printf("%d", ChoixTableau);
-    system("Pause");
     switch(ChoixTableau) {
         case 1:
 
@@ -221,7 +219,7 @@ void jouerPartie (){
                     printf("\n");//affichage du retour à la ligne
                 }
                 if (Compteur < 5) {
-                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
+                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 ou plus pour quitter)\n");//demande à l'utilisateur où il veut tirer
                     scanf("%d", &Vertical);
                     if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
                         printf("Horizontal :\n");
@@ -245,7 +243,7 @@ void jouerPartie (){
                         fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
                         fclose(Afficherlaide);
                         system("cls");
-                        printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                        printf("Le jeu de la bataille navale est tres simple, \nIl suffit de detruire tout les bateaux en touchant chaque partie du bateaux,\nil y a differents types de bateaux : \n1 porte- avions (5 cases), \nun croiseur (4 cases), \nun sous-marin (3 cases), \nun contre-torpilleur (3 cases) et \nun torpilleur (2 cases), \nles regles sont simple : \ncouler tout les bateaux. \nLe premier nombre a mettre est celui de gauche ensuite celui du haut.\n");
                         system("Pause");
                     }
                 } else { //affichage de l'écran quand on gagne
@@ -272,7 +270,7 @@ void jouerPartie (){
                             jouerPartie();//rejouer
                             break;
                         case 2:
-                            break;//revient au menu principale
+                            break;//revient au menu principal
                         case 3:
                             exit(EXIT_SUCCESS);//quitte le programme
                     }
@@ -335,7 +333,7 @@ void jouerPartie (){
                     printf("\n");//affichage du retour à la ligne
                 }
                 if (Compteur < 5) {
-                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
+                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 ou plus pour quitter)\n");//demande à l'utilisateur où il veut tirer
                     scanf("%d", &Vertical);
                     if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
                         printf("Horizontal :\n");
@@ -359,7 +357,7 @@ void jouerPartie (){
                         fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
                         fclose(Afficherlaide);
                         system("cls");
-                        printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                        printf("Le jeu de la bataille navale est tres simple, \nIl suffit de detruire tout les bateaux en touchant chaque partie du bateaux,\nil y a differents types de bateaux : \n1 porte- avions (5 cases), \nun croiseur (4 cases), \nun sous-marin (3 cases), \nun contre-torpilleur (3 cases) et \nun torpilleur (2 cases), \nles regles sont simple : \ncouler tout les bateaux. \nLe premier nombre a mettre est celui de gauche ensuite celui du haut.\n");
                         system("Pause");
                     }
                 } else { //affichage de l'écran quand on gagne
@@ -426,12 +424,12 @@ void jouerPartie (){
                             Compteur++;
                         }
                         if ((TableauJeu3[2][4] == 3) && (TableauJeu3[2][5] == 3) && (TableauJeu3[2][6] == 3) &&
-                            (TableauJeu3[2][7] == 3) && (TableauJeu3[52][8] == 3)) {//verification si le bateau est coulé
+                            (TableauJeu3[2][7] == 3) && (TableauJeu3[2][8] == 3)) {//verification si le bateau est coulé
                             TableauJeu3[2][4] = 5;
-                            TableauJeu3[8][5] = 5;
-                            TableauJeu3[8][6] = 5;
-                            TableauJeu3[8][7] = 5;
-                            TableauJeu3[8][8] = 5;
+                            TableauJeu3[2][5] = 5;
+                            TableauJeu3[2][6] = 5;
+                            TableauJeu3[2][7] = 5;
+                            TableauJeu3[2][8] = 5;
                             Compteur++;
                         }
                         if ((TableauJeu3[5][2] == 3) && (TableauJeu3[5][3] == 3)) {//verification si le bateau est coulé
@@ -449,7 +447,7 @@ void jouerPartie (){
                     printf("\n");//affichage du retour à la ligne
                 }
                 if (Compteur < 5) {
-                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 pour quitter)\n");//demande à l'utilisateur où il veut tirer
+                    printf("Ou voulez vous tirer ?\nVertical : (11 pour l'aide, 12 ou plus pour quitter)\n");//demande à l'utilisateur où il veut tirer
                     scanf("%d", &Vertical);
                     if (Vertical < 11) {//Si l'utilisateur entre une valeur pour afficher l'aide ou quitter
                         printf("Horizontal :\n");
@@ -473,7 +471,7 @@ void jouerPartie (){
                         fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide en jeu", UserName);
                         fclose(Afficherlaide);
                         system("cls");
-                        printf("La bataille navale oppose deux joueurs qui s'affrontent. \nChacun a une flotte composee de 5 bateaux, qui sont les suivants : \n1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre-torpilleur (3 cases), \n1 sous-marin (3 cases), 1 torpilleur (2 cases). \nLes bateaux ne doivent pas etre colles entre eux.\n Le but du jeux est d'abbatre tout les bateaux enemis\n");
+                        printf("Le jeu de la bataille navale est tres simple, \nIl suffit de detruire tout les bateaux en touchant chaque partie du bateaux,\nil y a differents types de bateaux : \n1 porte- avions (5 cases), \nun croiseur (4 cases), \nun sous-marin (3 cases), \nun contre-torpilleur (3 cases) et \nun torpilleur (2 cases), \nles regles sont simple : \ncouler tout les bateaux. \nLe premier nombre a mettre est celui de gauche ensuite celui du haut.\n");
                         system("Pause");
                     }
                 } else { //affichage de l'écran quand on gagne
@@ -540,7 +538,7 @@ void menuPrincipal(){
     fprintf(MenuPrincipal, "\nL'utilisateur : %s a affiché le menu principal", UserName);
     fclose(MenuPrincipal);
     printf("Bienvenu au menu principal,\nQue voulez vous faire ?\n");//demande à l'utilisateur ce qu'il veut faire
-    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Afficher les scores\n4 - Parametres\n5 - Quitter\n");
+    printf("1 - Jouer une partie\n2 - Afficher l'aide\n3 - Afficher les scores\n4 - Parametres\n5 - Quitter\n Choix :\n");
     scanf ("%d", &Choix);
     switch (Choix){
         case 1: {
@@ -557,7 +555,7 @@ void menuPrincipal(){
                 Afficherlaide = fopen("LOG", "a");
                 fprintf(Afficherlaide, "\nL'utilisateur : %s a affiché l'aide", UserName);
                 fclose(Afficherlaide);
-                printf("Le jeu de la bataille navale est très simple, \nIl suffit de détruire tout les bateaux en touchant chaque partie du bateaux,\nil y a différents types de bateaux : \n1 porte- avions (5 cases), \nun croiseur (4 cases), \nun sous-marin (3 cases), \nun contre-torpilleur (3 cases) et \nun torpilleur (2 cases), \nles règles sont simple : \ncouler tout les bateaux. \nLe premier nombre à mettre est celui de gauche ensuite celui du haut.");
+                printf("Le jeu de la bataille navale est tres simple, \nIl suffit de detruire tout les bateaux en touchant chaque partie du bateaux,\nil y a differents types de bateaux : \n1 porte- avions (5 cases), \nun croiseur (4 cases), \nun sous-marin (3 cases), \nun contre-torpilleur (3 cases) et \nun torpilleur (2 cases), \nles regles sont simple : \ncouler tout les bateaux. \nLe premier nombre a mettre est celui de gauche ensuite celui du haut.");
                 printf("\n\nAppuyer sur 1 pour revenir au menu principale\n");
                 scanf("%d", &Choix);
                 if (Choix == 1) menuPrincipal();//reour au menu principal
@@ -586,7 +584,7 @@ void menuPrincipal(){
             Param = fopen("LOG", "a");
             fprintf(Param, "\nL'utilisateur : %s a afficher les parametres", UserName);
             fclose(Param);
-            printf("1 - Couleure de l'interface\n2 - Parametres du compte\n");
+            printf("1 - Couleure de l'interface\n2 - Parametres du compte\nChoix :\n");
             scanf("%d", &Choix);
             switch (Choix){
                 case 1:
@@ -723,10 +721,11 @@ int main() {
 
             break;
         default:
-            printf("Choix invalide");
+            printf("Choix invalide\n");
 
             system("Pause");
             system("cls");//efface l'interface
+            main();
             break;
     }
 
