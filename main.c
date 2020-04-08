@@ -694,7 +694,49 @@ void menuPrincipal(){
 
 
 int main() {
+    SetConsoleTitle("Bataille Navale by Jonatan PERRET");
     int Choix = 0;
+    char SpaceAnimation[1] = {" "};
+    for (int i = 0; i < 50; i++) {
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+        printf("              |    |    |                 \n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+    printf("             )_)  )_)  )_)              \n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+printf("            )___))___))___)\\           \n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+    printf("           )____)____)_____)\\\\\n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+printf("         _____|____|____|____\\\\\\__\n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+printf("---------\\                   /---------\n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+printf("  ^^^^^ ^^^^^^^^^^^^^^^^^^^^^\n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+printf("    ^^^^      ^^^^     ^^^    ^^\n");
+        for (int j = 0; j <= i; j++){
+            printf("%s", SpaceAnimation);
+        }
+printf("         ^^^^      ^^^\n");
+        Sleep(25);
+        system("cls");
+    }
     system("cls");//efface l'interface
     printf(" _             _           _  _  _                                        _       \n"
            "| |           | |         (_)| || |                                      | |      \n"
